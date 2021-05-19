@@ -31,7 +31,7 @@ describe GuessChecker do
       expect(@guess_checker.split).to eq(['R', 'G', 'B', 'Y'])
     end
 
-    it 'with valid characters' do
+    it 'with valid colors' do
       @guess_checker.split
       expect(@guess_checker.valid_colors).to eq(true)
 
