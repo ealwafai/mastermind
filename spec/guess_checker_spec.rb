@@ -3,7 +3,8 @@ require './lib/guess_checker'
 
 describe GuessChecker do
   before(:each) do
-    @guess_checker = GuessChecker.new('RGBY')
+    @answer = ['R', 'B', 'G', 'Y']
+    @guess_checker = GuessChecker.new('RGBY', @answer)
   end
 
   context 'Attributes' do
@@ -20,10 +21,10 @@ describe GuessChecker do
     it 'with 4 characters' do
       expect(@guess_checker.length).to eq(true)
 
-      @guess_checker = GuessChecker.new('RGBYRB')
+      @guess_checker = GuessChecker.new('RGBYRB', @answer)
       expect(@guess_checker.length).to eq(false)
 
-      @guess_checker = GuessChecker.new('RG')
+      @guess_checker = GuessChecker.new('RG', @answer)
       expect(@guess_checker.length).to eq(false)
     end
 
@@ -35,14 +36,26 @@ describe GuessChecker do
       @guess_checker.split
       expect(@guess_checker.valid_colors).to eq(true)
 
-      @guess_checker = GuessChecker.new('FZBY')
+      @guess_checker = GuessChecker.new('FZBY', @answer)
       @guess_checker.split
       expect(@guess_checker.valid_colors).to eq(false)
 
-      @guess_checker = GuessChecker.new('BYFZ')
+      @guess_checker = GuessChecker.new('BYFZ', @answer)
       @guess_checker.split
       expect(@guess_checker.valid_colors).to eq(false)
     end
+  end
 
+  context 'compares guess to correct answer' do
+    it 'determines number of correct colors' do
+      @guess_checker.split
+
+      expect(@guess_checker.correct_colors).to eq(4)
+      @answer = ['R', 'G', 'G', 'B']
+      @guess_checker = GuessChecker.new('RRYY', @answer)
+      @guess_checker.split
+
+      expect(@guess_checker.correct_colors).to eq(1)
+    end
   end
 end
