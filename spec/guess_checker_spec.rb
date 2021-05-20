@@ -19,13 +19,14 @@ describe GuessChecker do
 
   context 'is valid user input' do
     it 'with 4 characters' do
-      expect(@guess_checker.length).to eq(true)
+      expect(@guess_checker.length_long).to eq(false)
+      expect(@guess_checker.length_short).to eq(false)
 
       @guess_checker = GuessChecker.new('RGBYRB', @answer)
-      expect(@guess_checker.length).to eq(false)
+      expect(@guess_checker.length_long).to eq(true)
 
       @guess_checker = GuessChecker.new('RG', @answer)
-      expect(@guess_checker.length).to eq(false)
+      expect(@guess_checker.length_short).to eq(true)
     end
 
     it 'splits the guess' do
