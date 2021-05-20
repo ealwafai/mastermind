@@ -4,7 +4,10 @@ class Messages
   end
 
   def instructions_message
-    puts ""
+    file = File.open("./lib/intructions.txt")
+    instructions = file.read
+    puts instructions
+    file.close
   end
 
   def secret_answer_message
@@ -16,7 +19,7 @@ class Messages
   end
 
   def too_short_message
-    puts "You have entered an invalid answer. Answer is short long!"
+    puts "You have entered an invalid answer. Answer is too short!"
   end
 
   def player_wins_message(guess, numbers, time)
