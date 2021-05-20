@@ -15,7 +15,6 @@ class GameRunner
       input = gets.chomp
       if input == 'p' || input == 'P'
         starter
-        break
       elsif input == 'i' || input == 'I'
         @messages.instructions_message
       elsif input == 'q' || input == 'Q'
@@ -29,20 +28,51 @@ class GameRunner
 
   def starter
     solution = @secret_answer.solution
-    loop do
+    @has_won == false
+    until @has_won == true do
       @messages.secret_answer_message
-      input = gets
-      @guess_checker = GuessChecker.new(input, solution)
-      if @guess_checker.length_short == true
-        @messages.too_short_message
-      elsif @guess_checker.length_long == true
-        @messages.too_long_message
-      elsif @guess_checker.valid_colors == false
-        @messages.invalid_color_message
-      else
-        tester
+      @og_guess = gets
+      if @og_guess == 'Q' || @og_guess == 'q'
+        @messages.quit_message
         break
+      elsif @og_guess == 'C' || @og_guess == 'c'
+        @messages.cheat_message
+        break
+      else
+        @guess_checker = GuessChecker.new(@og_guess, solution)
+        @guess_checker.split
+        valid_input
+        if valid_input == true
+          compare
+          break
+        end
       end
+    end
+  end
+
+  def valid_input
+    valid = true
+    if @guess_checker.length_short == true
+      @messages.too_short_message
+      valid = false
+    elsif @guess_checker.length_long == true
+      @messages.too_long_message
+      valid = false
+    elsif @guess_checker.valid_colors == false
+      @messages.invalid_color_message
+      valid = false
+    end
+    valid
+  end
+
+  def compare
+    colors = @guess_checker.correct_colors
+    positions = @guess_checker.correct_positions
+    if positions == 4
+      @messages.player_wins_message(@og_guess, "0 guesses", 111)
+      @has_won = true
+    else
+      @messages.correct_guesses_message(@og_guess, colors, positions)
     end
   end
 end
