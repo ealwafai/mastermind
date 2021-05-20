@@ -19,17 +19,33 @@ describe GuessChecker do
 
   context 'is valid user input' do
     it 'with 4 characters' do
-      expect(@guess_checker.length).to eq(true)
+      expect(@guess_checker.length_long).to eq(false)
+      expect(@guess_checker.length_short).to eq(false)
 
       @guess_checker = GuessChecker.new('RGBYRB', @answer)
-      expect(@guess_checker.length).to eq(false)
+      expect(@guess_checker.length_long).to eq(true)
 
       @guess_checker = GuessChecker.new('RG', @answer)
-      expect(@guess_checker.length).to eq(false)
+      expect(@guess_checker.length_short).to eq(true)
     end
 
     it 'splits the guess' do
       expect(@guess_checker.split).to eq(['R', 'G', 'B', 'Y'])
+    end
+
+    it 'converts to all caps' do
+      @guess_checker = GuessChecker.new('rgby', @answer)
+      @guess_checker.split
+      @guess_checker.all_caps
+
+      expect(@guess_checker.guess).to eq(['R', 'G', 'B', 'Y'])
+
+      @guess_checker = GuessChecker.new('RGby', @answer)
+      @guess_checker.split
+      @guess_checker.all_caps
+
+      expect(@guess_checker.guess).to eq(['R', 'G', 'B', 'Y'])
+
     end
 
     it 'with valid colors' do
