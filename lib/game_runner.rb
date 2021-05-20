@@ -7,19 +7,18 @@ class GameRunner
   def initialize
     @messages = Messages.new
     @secret_answer = SecretAnswer.new
-    @guess_checker = GuessChecker.new
   end
 
-  def starter
+  def intro
     loop do
       @messages.welcome_message
-      user_input = gets.chomp
-      if user_input == 'p' || user_input == 'P'
-        runner
+      input = gets.chomp
+      if input == 'p' || input == 'P'
+        starter
         break
-      elsif user_input == 'i' || user_input == 'I'
+      elsif input == 'i' || input == 'I'
         @messages.instructions_message
-      elsif user_input == 'q' || user_input == 'Q'
+      elsif input == 'q' || input == 'Q'
         @messages.quit_message
         break
       else
@@ -28,5 +27,22 @@ class GameRunner
     end
   end
 
-
+  def starter
+    solution = @secret_answer.solution
+    loop do
+      @messages.secret_answer_message
+      input = gets
+      @guess_checker = GuessChecker.new(input, solution)
+      if @guess_checker.length_short == true
+        @messages.too_short_message
+      elsif @guess_checker.length_long == true
+        @messages.too_long_message
+      elsif @guess_checker.valid_colors == false
+        @messages.invalid_color_message
+      else
+        tester
+        break
+      end
+    end
+  end
 end
