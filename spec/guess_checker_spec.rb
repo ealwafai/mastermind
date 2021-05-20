@@ -56,6 +56,11 @@ describe GuessChecker do
       @guess_checker.split
 
       expect(@guess_checker.correct_colors).to eq(1)
+
+      @answer = ['R', 'R', 'R', 'R']
+      @guess_checker = GuessChecker.new('GGYY', @answer)
+      @guess_checker.split
+      expect(@guess_checker.correct_colors).to eq(0)
     end
   end
 end
