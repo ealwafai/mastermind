@@ -32,6 +32,14 @@ describe GuessChecker do
       expect(@guess_checker.split).to eq(['R', 'G', 'B', 'Y'])
     end
 
+    it 'converts to all caps' do
+      @guess_checker = GuessChecker.new('rgby', @answer)
+      @guess_checker.split
+      @guess_checker.all_caps
+
+      expect(@guess_checker.guess).to eq('R', 'G', 'B', 'Y')
+    end
+
     it 'with valid colors' do
       @guess_checker.split
       expect(@guess_checker.valid_colors).to eq(true)
