@@ -49,18 +49,22 @@ describe GuessChecker do
   context 'compares guess to correct answer' do
     it 'determines number of correct colors' do
       @guess_checker.split
-
       expect(@guess_checker.correct_colors).to eq(4)
+
       @answer = ['R', 'G', 'G', 'B']
       @guess_checker = GuessChecker.new('RRYY', @answer)
       @guess_checker.split
-
       expect(@guess_checker.correct_colors).to eq(1)
 
       @answer = ['R', 'R', 'R', 'R']
       @guess_checker = GuessChecker.new('GGYY', @answer)
       @guess_checker.split
       expect(@guess_checker.correct_colors).to eq(0)
+    end
+
+    it 'determines number of correct positions' do
+      @guess_checker.split
+      expect(@guess_checker.correct_positions).to eq(2)
     end
   end
 end
