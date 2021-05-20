@@ -6,8 +6,12 @@ attr_reader :guess, :answer
     @answer = answer
   end
 
-  def length
-    @guess.length == 4
+  def length_long
+    @guess.length > 4
+  end
+
+  def length_short
+    @guess.length < 4
   end
 
   def split
