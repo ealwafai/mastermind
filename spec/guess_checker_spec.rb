@@ -65,6 +65,16 @@ describe GuessChecker do
     it 'determines number of correct positions' do
       @guess_checker.split
       expect(@guess_checker.correct_positions).to eq(2)
+
+      @answer = ['R', 'R', 'R', 'R']
+      @guess_checker = GuessChecker.new('GGYY', @answer)
+      @guess_checker.split
+      expect(@guess_checker.correct_positions).to eq(0)
+
+      @answer = ['R', 'B', 'Y', 'R']
+      @guess_checker = GuessChecker.new('RBYR', @answer)
+      @guess_checker.split
+      expect(@guess_checker.correct_positions).to eq(4)
     end
   end
 end
