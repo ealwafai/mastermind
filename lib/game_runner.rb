@@ -10,12 +10,12 @@ class GameRunner
   end
 
   def intro
-    loop do
+    @has_won == false
+    until @has_won == true do
       @messages.welcome_message
       input = gets.chomp
       if input == 'p' || input == 'P'
         starter
-        break
       elsif input == 'i' || input == 'I'
         @messages.instructions_message
       elsif input == 'q' || input == 'Q'
@@ -31,15 +31,15 @@ class GameRunner
     solution = @secret_answer.solution
     loop do
       @messages.secret_answer_message
-      input = gets
-      if input == 'Q' || input == 'q'
+      @og_guess = gets
+      if @og_guess == 'Q' || @og_guess == 'q'
         @messages.quit_message
         break
-      elsif input == 'C' || input == 'c'
+      elsif @og_guess == 'C' || @og_guess == 'c'
         @messages.cheat_message
         break
       else
-        @guess_checker = GuessChecker.new(input, solution)
+        @guess_checker = GuessChecker.new(@og_guess, solution)
         @guess_checker.split
         valid_input
         if valid_input == true
@@ -66,6 +66,13 @@ class GameRunner
   end
 
   def compare
-    
+    colors = @guess_checker.correct_colors
+    positions = @guess_checker.correct_positions
+    if positions == 4
+      @messages.player_wins_message
+      @has_won = true
+    else
+      @messages.correct_guesses_message(@og_guess, colors, positions)
+    end
   end
 end
