@@ -42,4 +42,9 @@ class Messages
     puts "Thank you for playing Mastermind, created by Lee and Ezze"
   end
 
+  def correct_guesses_message(guess, color, position)
+    puts "\'#{guess}\' has #{color} of the correct elements with #{position} in the correct positions"
+    puts "You've taken ADD GUESS COUNT"
+  end
+
 end
