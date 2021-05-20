@@ -1,8 +1,9 @@
 class GuessChecker
-attr_reader :guess
+attr_reader :guess, :answer
 
-  def initialize(guess)
+  def initialize(guess, answer)
     @guess = guess
+    @answer = answer
   end
 
   def length
@@ -23,5 +24,22 @@ attr_reader :guess
       end
     end
     result
+  end
+
+  def correct_colors
+    correct_colors = 0
+    temp_answer = @answer
+    @guess.each do |gcolor|
+      index = 0
+      temp_answer.each do |acolor|
+        if gcolor == acolor
+          correct_colors += 1
+          temp_answer[index] = 'X'
+          index += 1
+          break
+        end
+      end
+    end
+    correct_colors
   end
 end
