@@ -10,8 +10,7 @@ class GameRunner
   end
 
   def intro
-    @has_won == false
-    until @has_won == true do
+    loop do
       @messages.welcome_message
       input = gets.chomp
       if input == 'p' || input == 'P'
@@ -29,7 +28,8 @@ class GameRunner
 
   def starter
     solution = @secret_answer.solution
-    loop do
+    @has_won == false
+    until @has_won == true do
       @messages.secret_answer_message
       @og_guess = gets
       if @og_guess == 'Q' || @og_guess == 'q'
@@ -69,7 +69,7 @@ class GameRunner
     colors = @guess_checker.correct_colors
     positions = @guess_checker.correct_positions
     if positions == 4
-      @messages.player_wins_message
+      @messages.player_wins_message(@og_guess, "0 guesses", 111)
       @has_won = true
     else
       @messages.correct_guesses_message(@og_guess, colors, positions)
