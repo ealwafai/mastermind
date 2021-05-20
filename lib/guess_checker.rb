@@ -28,13 +28,17 @@ attr_reader :guess, :answer
 
   def correct_colors
     correct_colors = 0
-    index = 0
-    @guess.each do |color|
-      @answer.find do |color|
-        correct_colors += 1
-        @answer.shift[index]
+    temp_answer = @answer
+    @guess.each do |gcolor|
+      index = 0
+      temp_answer.each do |acolor|
+        if gcolor == acolor
+          correct_colors += 1
+          temp_answer[index] = 'X'
+          index += 1
+          break
+        end
       end
-      index += 1
     end
     correct_colors
   end
