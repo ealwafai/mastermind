@@ -15,6 +15,10 @@ attr_reader :guess, :answer
     @guess
   end
 
+  def all_caps
+    @guess = @guess.map { |color| color.upcase }
+  end
+
   def valid_colors
     valid_options = ['R', 'B', 'G', 'Y']
     result = true
