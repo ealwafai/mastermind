@@ -32,17 +32,40 @@ class GameRunner
     loop do
       @messages.secret_answer_message
       input = gets
-      @guess_checker = GuessChecker.new(input, solution)
-      if @guess_checker.length_short == true
-        @messages.too_short_message
-      elsif @guess_checker.length_long == true
-        @messages.too_long_message
-      elsif @guess_checker.valid_colors == false
-        @messages.invalid_color_message
-      else
-        tester
+      if input == 'Q' || input == 'q'
+        @messages.quit_message
         break
+      elsif input == 'C' || input == 'c'
+        @messages.cheat_message
+        break
+      else
+        @guess_checker = GuessChecker.new(input, solution)
+        @guess_checker.split
+        valid_input
+        if valid_input == true
+          compare
+          break
+        end
       end
     end
+  end
+
+  def valid_input
+    valid = true
+    if @guess_checker.length_short == true
+      @messages.too_short_message
+      valid = false
+    elsif @guess_checker.length_long == true
+      @messages.too_long_message
+      valid = false
+    elsif @guess_checker.valid_colors == false
+      @messages.invalid_color_message
+      valid = false
+    end
+    valid
+  end
+
+  def compare
+    
   end
 end
