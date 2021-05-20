@@ -27,42 +27,42 @@ class GameRunner
   end
 
   def starter
-    solution = @secret_answer.solution
+    @solution = @secret_answer.solution
     @has_won == false
     until @has_won == true do
       @messages.secret_answer_message
-      @og_guess = gets
+      @og_guess = gets.chomp
       if @og_guess == 'Q' || @og_guess == 'q'
         @messages.quit_message
         break
       elsif @og_guess == 'C' || @og_guess == 'c'
-        @messages.cheat_message
+        @messages.cheat_message(@solution)
         break
       else
-        @guess_checker = GuessChecker.new(@og_guess, solution)
+        @guess_checker = GuessChecker.new(@og_guess, @solution)
         @guess_checker.split
+        @guess_checker.all_caps
         valid_input
-        if valid_input == true
+        if @valid == true
           compare
-          break
         end
       end
     end
   end
 
   def valid_input
-    valid = true
+    @valid = true
     if @guess_checker.length_short == true
       @messages.too_short_message
-      valid = false
+      @valid = false
     elsif @guess_checker.length_long == true
       @messages.too_long_message
-      valid = false
+      @valid = false
     elsif @guess_checker.valid_colors == false
       @messages.invalid_color_message
-      valid = false
+      @valid = false
     end
-    valid
+    @valid
   end
 
   def compare
