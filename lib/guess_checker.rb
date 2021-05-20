@@ -42,4 +42,16 @@ attr_reader :guess, :answer
     end
     correct_colors
   end
+
+  def correct_positions
+    correct_positions = 0
+    index = 0
+    @guess.each do |color|
+      if color == @answer[index]
+        correct_positions += 1
+        index += 1
+      end
+    end
+    correct_positions
+  end
 end
