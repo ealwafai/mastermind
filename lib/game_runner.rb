@@ -1,9 +1,13 @@
 require './lib/guess_checker'
 require './lib/secret_answer'
+require './lib/messages'
 
 class GameRunner
 
   def initialize
+    @messages = Messages.new
+    @secret_answer = SecretAnswer.new
+    @guess_checker = GuessChecker.new
   end
 
   def starter
