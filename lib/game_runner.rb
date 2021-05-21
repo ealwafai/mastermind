@@ -27,52 +27,56 @@ class GameRunner
   end
 
   def starter
+    @guess_count = 0
     @solution = @secret_answer.solution
-    @has_won == false
-    until @has_won == true do
-      @messages.secret_answer_message
-      @og_guess = gets.chomp
-      if @og_guess == 'Q' || @og_guess == 'q'
+    has_won = false
+    @messages.starter_message
+    until has_won == true do
+      @messages.prompt_guess_message
+      guess = gets.chomp
+      if guess == 'Q' || guess == 'q'
         @messages.quit_message
         break
-      elsif @og_guess == 'C' || @og_guess == 'c'
+      elsif guess == 'C' || guess == 'c'
         @messages.cheat_message(@solution)
         break
       else
-        @guess_checker = GuessChecker.new(@og_guess, @solution)
-        @guess_checker.split
-        @guess_checker.all_caps
-        valid_input
-        if @valid == true
-          compare
-        end
+        has_won = analyze(guess)
       end
     end
   end
 
-  def valid_input
-    @valid = true
-    if @guess_checker.length_short == true
-      @messages.too_short_message
-      @valid = false
-    elsif @guess_checker.length_long == true
-      @messages.too_long_message
-      @valid = false
-    elsif @guess_checker.valid_colors == false
-      @messages.invalid_color_message
-      @valid = false
+  def analyze(guess)
+    @guess_checker = GuessChecker.new(guess, @solution)
+    @guess_checker.split
+    @guess_checker.all_caps
+    if valid_input != false
+     @guess_count += 1
+     compare(guess)
     end
-    @valid
   end
 
-  def compare
+  def valid_input
+    if @guess_checker.valid_colors == false
+      @messages.invalid_color_message
+      false
+    elsif @guess_checker.length_long == true
+      @messages.too_long_message
+      false
+    elsif @guess_checker.length_short == true
+      @messages.too_short_message
+      false
+    end
+  end
+
+  def compare(guess)
     colors = @guess_checker.correct_colors
     positions = @guess_checker.correct_positions
     if positions == 4
-      @messages.player_wins_message(@og_guess, "0 guesses", 111)
-      @has_won = true
+      @messages.player_wins_message(guess, @guess_count, 111)
+      true
     else
-      @messages.correct_guesses_message(@og_guess, colors, positions)
+      @messages.correct_guesses_message(@guess_count, guess, colors, positions)
     end
   end
 end
