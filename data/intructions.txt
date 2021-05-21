@@ -1,0 +1,18 @@
+Mastermind Game Rules
+
+OBJECT OF THE GAME
+
+The object of MASTERMIND is to guess a secret code consisting of a series of 4 colors. Each guess results in feedback narrowing down the possibilities of the code.
+
+CONTENTS
+
+**Mention Unlimited tries?
+**Mention case insensitivity?
+
+Game
+
+You, as the Codebreaker, will attempt to duplicate the exact colors and positions of the secret code.
+The colors are: Red, Green, Blue, and Yellow.
+Enter on the keyboard (r) for Red, (g) for Green, (b) for Blue, and (y) for Yellow.
+
+**Create message that talks about correct colors and correct positions.

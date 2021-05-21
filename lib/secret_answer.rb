@@ -6,7 +6,7 @@ class SecretAnswer
 
   def solution
     @answer = []
-    colors = [:red, :blue, :yellow, :green]
+    colors = ['R', 'G', 'Y', 'B']
     4.times do
       index = rand(0..3)
       @answer << colors[index]

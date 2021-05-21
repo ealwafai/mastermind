@@ -13,7 +13,7 @@ describe SecretAnswer do
       secret_answer = SecretAnswer.new
 
       expect(secret_answer.solution.length).to eq(4)
-      expect(secret_answer.solution).to include(:red).or include(:blue).or include(:yellow).or include(:green)
+      expect(secret_answer.solution).to include('R').or include('B').or include('Y').or include('G')
     end
   end
 end

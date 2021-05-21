@@ -34,11 +34,16 @@ class Messages
     puts "GAME OVER!\n"
   end
 
-  def invalid_answer_message
-    puts "You have an invalid answer. Please try again!\n"
+  def invalid_color_message
+    puts "You have entered an invalid color. Please try again!\n"
   end
 
   def quit_message
     puts "Thank you for playing Mastermind, created by Lee and Ezze\n"
+  end
+  
+  def correct_guesses_message(guess, color, position)
+    puts "\'#{guess}\' has #{color} of the correct elements with #{position} in the correct positions"
+    puts "You've taken ADD GUESS COUNT"
   end
 end
