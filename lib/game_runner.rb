@@ -42,8 +42,7 @@ class GameRunner
         @guess_checker = GuessChecker.new(@og_guess, @solution)
         @guess_checker.split
         @guess_checker.all_caps
-        valid_input
-        if @valid == true
+        if valid_input == true
           compare
         end
       end
@@ -51,18 +50,18 @@ class GameRunner
   end
 
   def valid_input
-    @valid = true
-    if @guess_checker.length_short == true
-      @messages.too_short_message
-      @valid = false
+    valid = true
+    if @guess_checker.valid_colors == false
+      @messages.invalid_color_message
+      valid = false
     elsif @guess_checker.length_long == true
       @messages.too_long_message
-      @valid = false
-    elsif @guess_checker.valid_colors == false
-      @messages.invalid_color_message
-      @valid = false
+      valid = false
+    elsif @guess_checker.length_short == true
+      @messages.too_short_message
+      valid = false
     end
-    @valid
+    valid
   end
 
   def compare
