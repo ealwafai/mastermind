@@ -1,4 +1,7 @@
+-------------------
+
 Mastermind Game Rules
+
 
 OBJECT OF THE GAME
 
@@ -15,4 +18,8 @@ You, as the Codebreaker, will attempt to duplicate the exact colors and position
 The colors are: Red, Green, Blue, and Yellow.
 Enter on the keyboard (r) for Red, (g) for Green, (b) for Blue, and (y) for Yellow.
 
-**Create message that talks about correct colors and correct positions.
+
+The game will indicate the number of correct colors regardless of position and the correct colors based on the correct positions. The game will calculate the number of guesses as well as the total time it took the Codebreaker to figure out the correct sequence.
+
+
+---------------------
