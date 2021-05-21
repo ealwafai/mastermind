@@ -1,6 +1,6 @@
 class Messages
   def welcome_message
-    puts "Welcome to MASTERMIND. \n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    puts "Welcome to MASTERMIND. \n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
   end
 
   def instructions_message
@@ -11,35 +11,34 @@ class Messages
   end
 
   def secret_answer_message
-    puts "I have generated a beginner sequence with four elements made up of: (r)ed,(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat’s your guess?"
+    puts "I have generated a beginner sequence with four elements made up of: (r)ed,(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat’s your guess?\n"
   end
 
   def too_long_message
-    puts "You have entered an invalid answer. Answer is too long!"
+    puts "You have entered an invalid answer. Answer is too long!\n"
   end
 
   def too_short_message
-    puts "You have entered an invalid answer. Answer is too short!"
+    puts "You have entered an invalid answer. Answer is too short!\n"
   end
 
   def player_wins_message(guess, numbers, time)
-    puts "Congratulations! You guessed the sequence #{guess} in #{numbers} over #{time}.\n\nDo you want to (p)lay again or (q)uit?"
+    puts "Congratulations! You guessed the sequence #{guess} in #{numbers} over #{time}.\n\nDo you want to (p)lay again or (q)uit?\n"
   end
 
   def cheat_message(secret_answer)
-    puts "You have chosen to take the easy way out. Here is the #{secret_answer}."
+    puts "You have chosen to take the easy way out. Here is the #{secret_answer}.\n"
   end
 
   def player_loses_message
-    puts "GAME OVER!"
+    puts "GAME OVER!\n"
   end
 
   def invalid_answer_message
-    puts "You have an invalid answer. Please try again!"
+    puts "You have an invalid answer. Please try again!\n"
   end
 
   def quit_message
-    puts "Thank you for playing Mastermind, created by Lee and Ezze"
+    puts "Thank you for playing Mastermind, created by Lee and Ezze\n"
   end
-
 end
