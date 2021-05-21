@@ -36,16 +36,16 @@ attr_reader :guess, :answer
 
   def correct_colors
     correct_colors = 0
-    temp_answer = @answer
+    temp_answer = @answer.clone
     @guess.each do |gcolor|
       index = 0
       temp_answer.each do |acolor|
         if gcolor == acolor
           correct_colors += 1
           temp_answer[index] = 'X'
-          index += 1
           break
         end
+        index += 1
       end
     end
     correct_colors
@@ -57,8 +57,8 @@ attr_reader :guess, :answer
     @guess.each do |color|
       if color == @answer[index]
         correct_positions += 1
-        index += 1
       end
+      index += 1
     end
     correct_positions
   end
