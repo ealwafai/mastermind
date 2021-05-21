@@ -27,10 +27,12 @@ class GameRunner
   end
 
   def starter
+    @guess_count = 0
     @solution = @secret_answer.solution
     has_won = false
+    @messages.starter_message
     until has_won == true do
-      @messages.secret_answer_message
+      @messages.prompt_guess_message
       guess = gets.chomp
       if guess == 'Q' || guess == 'q'
         @messages.quit_message
@@ -49,6 +51,7 @@ class GameRunner
     @guess_checker.split
     @guess_checker.all_caps
     if valid_input != false
+     @guess_count += 1
      compare(guess)
     end
   end
@@ -70,10 +73,10 @@ class GameRunner
     colors = @guess_checker.correct_colors
     positions = @guess_checker.correct_positions
     if positions == 4
-      @messages.player_wins_message(guess, "0 guesses", 111)
+      @messages.player_wins_message(guess, @guess_count, 111)
       true
     else
-      @messages.correct_guesses_message(guess, colors, positions)
+      @messages.correct_guesses_message(@guess_count, guess, colors, positions)
     end
   end
 end
