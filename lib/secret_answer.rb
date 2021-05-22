@@ -4,13 +4,19 @@ class SecretAnswer
   def initialize
   end
 
-  def solution
-    @answer = []
-    colors = ['R', 'G', 'Y', 'B']
-    4.times do
-      index = rand(0..3)
-      @answer << colors[index]
+  def solution(char, color)
+    answer = []
+    if color == 4
+      colors = ['R', 'G', 'Y', 'B']
+    elsif color == 5
+      colors = ['R', 'G', 'Y', 'B', 'O']
+    elsif color == 6
+      colors = ['R', 'G', 'Y', 'B', 'O', 'P']
     end
-    @answer
+    char.times do
+      index = rand(0..3)
+      answer << colors[index]
+    end
+    answer
   end
 end
