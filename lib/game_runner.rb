@@ -29,6 +29,7 @@ class GameRunner
   def starter
     @guess_count = 0
     @solution = @secret_answer.solution
+    @timer = Time.now
     has_won = false
     @messages.starter_message
     until has_won == true do
@@ -72,8 +73,9 @@ class GameRunner
   def compare(guess)
     colors = @guess_checker.correct_colors
     positions = @guess_checker.correct_positions
+    elapsed_time = (Time.at(Time.now - @timer).utc.strftime("%M minutes and %S seconds"))
     if positions == 4
-      @messages.player_wins_message(guess, @guess_count, 111)
+      @messages.player_wins_message(guess, @guess_count, elapsed_time)
       true
     else
       @messages.correct_guesses_message(@guess_count, guess, colors, positions)
