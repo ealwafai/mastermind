@@ -10,6 +10,10 @@ class Messages
     file.close
   end
 
+  def difficulty_level_message
+    puts "create message"
+  end
+  
   def starter_message
     puts "\nI have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n"
   end
