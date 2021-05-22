@@ -14,7 +14,7 @@ class GameRunner
       @messages.welcome_message
       input = gets.chomp
       if input == 'p' || input == 'P'
-        setup
+        difficulty_input
       elsif input == 'i' || input == 'I'
         @messages.instructions_message
       elsif input == 'q' || input == 'Q'
@@ -26,16 +26,16 @@ class GameRunner
     end
   end
 
-  def setup
+  def difficulty_input
     loop do
     @messages.difficulty_level_message
     input = gets.chomp
     if input == 'b' || input == 'B'
-      difficulty(1)
+      difficulty_level(1)
     elsif input == 'i' || input == 'I'
-      difficulty(2)
+      difficulty_level(2)
     elsif input == 'h' || input == 'H'
-      difficulty(3)
+      difficulty_level(3)
     elsif input == 'q' || input == 'Q'
       break
     else
@@ -43,10 +43,29 @@ class GameRunner
     end
   end
 
-  def starter
-    @guess_count = 0
-    @solution = @secret_answer.solution
+  def difficulty_level(level)
+    if level == 1
+      char = 4
+      color = 4
+    elsif level == 2
+      char = 6
+      color = 5
+    elsif level == 3
+      char = 8
+      color = 6
+    end
+    setup(char, color)
+  end
+
+  def setup(char, color)
+    @solution = @secret_answer.solution(char, color)
+    @messages.starter_message(char, color)
     @timer = Time.now
+    @guess_count = 0
+    starter(char, color)
+  end
+
+  def starter(char, color)
     has_won = false
     @messages.starter_message
     until has_won == true do
@@ -59,29 +78,29 @@ class GameRunner
         @messages.cheat_message(@solution)
         break
       else
-        has_won = analyze(guess)
+        has_won = analyze(guess, char, color)
       end
     end
   end
 
-  def analyze(guess)
+  def analyze(guess, char, color)
     @guess_checker = GuessChecker.new(guess, @solution)
     @guess_checker.split
     @guess_checker.all_caps
-    if valid_input != false
+    if valid_input(char, color) != false
      @guess_count += 1
      compare(guess)
     end
   end
 
-  def valid_input
-    if @guess_checker.valid_colors == false
+  def valid_input(char, color)
+    if @guess_checker.valid_colors(color) == false
       @messages.invalid_color_message
       false
-    elsif @guess_checker.length_long == true
+    elsif @guess_checker.length_long(char) == true
       @messages.too_long_message
       false
-    elsif @guess_checker.length_short == true
+    elsif @guess_checker.length_short(char) == true
       @messages.too_short_message
       false
     end
