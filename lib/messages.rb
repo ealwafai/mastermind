@@ -4,7 +4,7 @@ class Messages
   end
 
   def instructions_message
-    file = File.open("./lib/intructions.txt")
+    file = File.open("./data/instructions.txt")
     instructions = file.read
     puts instructions
     file.close
