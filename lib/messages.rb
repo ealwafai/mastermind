@@ -29,12 +29,15 @@ class Messages
   def player_wins_message(guess, numbers, time)
     puts ""
     puts "-" * 20
-    puts "Congratulations! You guessed the sequence #{guess} in #{numbers} guesses over #{time}.\n"
+    puts "Congratulations! You guessed the sequence #{guess} in #{numbers} guesses in #{time}.\n"
     puts "-" * 20
   end
 
   def cheat_message(secret_answer)
-    puts "\nYou have chosen to take the easy way out. Here is the #{secret_answer}.\n"
+    puts ""
+    puts "-" * 20
+    puts "You have chosen to take the easy way out. Here is the #{secret_answer}.\n"
+    puts "-" * 20
   end
 
   def player_loses_message
