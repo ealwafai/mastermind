@@ -14,7 +14,7 @@ class GameRunner
       @messages.welcome_message
       input = gets.chomp
       if input == 'p' || input == 'P'
-        starter
+        setup
       elsif input == 'i' || input == 'I'
         @messages.instructions_message
       elsif input == 'q' || input == 'Q'
@@ -23,6 +23,23 @@ class GameRunner
       else
         puts 'Invalid input'
       end
+    end
+  end
+
+  def setup
+    loop do
+    @messages.difficulty_level_message
+    input = gets.chomp
+    if input == 'b' || input == 'B'
+      difficulty(1)
+    elsif input == 'i' || input == 'I'
+      difficulty(2)
+    elsif input == 'h' || input == 'H'
+      difficulty(3)
+    elsif input == 'q' || input == 'Q'
+      break
+    else
+      puts 'Invalid input'
     end
   end
 
