@@ -14,7 +14,7 @@ class SecretAnswer
       colors = ['R', 'G', 'Y', 'B', 'O', 'P']
     end
     char.times do
-      index = rand(0..(char - 1))
+      index = rand(0..(color - 1))
       answer << colors[index]
     end
     answer
