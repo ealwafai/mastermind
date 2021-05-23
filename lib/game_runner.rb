@@ -28,18 +28,20 @@ class GameRunner
 
   def difficulty_input
     loop do
-    @messages.difficulty_level_message
-    input = gets.chomp
-    if input == 'b' || input == 'B'
-      difficulty_level(1)
-    elsif input == 'i' || input == 'I'
-      difficulty_level(2)
-    elsif input == 'h' || input == 'H'
-      difficulty_level(3)
-    elsif input == 'q' || input == 'Q'
-      break
-    else
-      puts 'Invalid input'
+      @messages.difficulty_level_message
+      input = gets.chomp
+      if input == 'b' || input == 'B'
+        difficulty_level(1)
+      elsif input == 'i' || input == 'I'
+        difficulty_level(2)
+      elsif input == 'h' || input == 'H'
+        difficulty_level(3)
+      elsif input == 'q' || input == 'Q'
+        @messages.quit_message
+        exit
+      else
+        puts 'Invalid input'
+      end
     end
   end
 
@@ -59,7 +61,13 @@ class GameRunner
 
   def setup(char, color)
     @solution = @secret_answer.solution(char, color)
-    @messages.starter_message(char, color)
+    if char == 4
+      @messages.starter_message_beginner
+    elsif char == 6
+      @messages.starter_message_intermediate
+    elsif char == 8
+      @messages.starter_message_hard
+    end
     @timer = Time.now
     @guess_count = 0
     starter(char, color)
@@ -67,13 +75,12 @@ class GameRunner
 
   def starter(char, color)
     has_won = false
-    @messages.starter_message
     until has_won == true do
       @messages.prompt_guess_message
       guess = gets.chomp
       if guess == 'Q' || guess == 'q'
         @messages.quit_message
-        break
+        exit
       elsif guess == 'C' || guess == 'c'
         @messages.cheat_message(@solution)
         break
@@ -81,6 +88,7 @@ class GameRunner
         has_won = analyze(guess, char, color)
       end
     end
+    restart
   end
 
   def analyze(guess, char, color)
@@ -89,7 +97,7 @@ class GameRunner
     @guess_checker.all_caps
     if valid_input(char, color) != false
      @guess_count += 1
-     compare(guess)
+     compare(guess, char)
     end
   end
 
@@ -106,15 +114,26 @@ class GameRunner
     end
   end
 
-  def compare(guess)
+  def compare(guess, char)
     colors = @guess_checker.correct_colors
     positions = @guess_checker.correct_positions
     elapsed_time = (Time.at(Time.now - @timer).utc.strftime("%M minutes and %S seconds"))
-    if positions == 4
+    if positions == char
       @messages.player_wins_message(guess, @guess_count, elapsed_time)
       true
     else
       @messages.correct_guesses_message(@guess_count, guess, colors, positions)
+    end
+  end
+
+  def restart
+    @messages.restart_message
+    input = gets.chomp
+    if input == 'p' || input == 'P'
+      intro
+    elsif input == 'q' || input == 'Q'
+      @messages.quit_message
+      exit
     end
   end
 end
