@@ -19,14 +19,43 @@ describe GuessChecker do
 
   context 'is valid user input' do
     it 'with 4 characters' do
-      expect(@guess_checker.length_long).to eq(false)
-      expect(@guess_checker.length_short).to eq(false)
+
+      expect(@guess_checker.length_long(4)).to eq(false)
+      expect(@guess_checker.length_short(4)).to eq(false)
 
       @guess_checker = GuessChecker.new('RGBYRB', @answer)
-      expect(@guess_checker.length_long).to eq(true)
+      expect(@guess_checker.length_long(4)).to eq(true)
 
       @guess_checker = GuessChecker.new('RG', @answer)
-      expect(@guess_checker.length_short).to eq(true)
+      expect(@guess_checker.length_short(4)).to eq(true)
+    end
+
+    it 'with 6 characters' do
+      @answer = ['R', 'B', 'G', 'Y', 'O', 'R']
+      @guess_checker = GuessChecker.new('RGBYRR', @answer)
+
+      expect(@guess_checker.length_long(6)).to eq(false)
+      expect(@guess_checker.length_short(6)).to eq(false)
+
+      @guess_checker = GuessChecker.new('RGBYRBRR', @answer)
+      expect(@guess_checker.length_long(6)).to eq(true)
+
+      @guess_checker = GuessChecker.new('RGRR', @answer)
+      expect(@guess_checker.length_short(6)).to eq(true)
+    end
+
+    it 'with 8 characters' do
+      @answer = ['R', 'B', 'G', 'Y', 'O', 'P', 'G', 'B']
+      @guess_checker = GuessChecker.new('RGBYOOOO', @answer)
+
+      expect(@guess_checker.length_long(8)).to eq(false)
+      expect(@guess_checker.length_short(8)).to eq(false)
+
+      @guess_checker = GuessChecker.new('RGBYRBRRR', @answer)
+      expect(@guess_checker.length_long(8)).to eq(true)
+
+      @guess_checker = GuessChecker.new('RGRRRR', @answer)
+      expect(@guess_checker.length_short(8)).to eq(true)
     end
 
     it 'splits the guess' do
@@ -48,17 +77,47 @@ describe GuessChecker do
 
     end
 
-    it 'with valid colors' do
+    it 'with 4 valid colors' do
       @guess_checker.split
-      expect(@guess_checker.valid_colors).to eq(true)
+      expect(@guess_checker.valid_colors(4)).to eq(true)
 
       @guess_checker = GuessChecker.new('FZBY', @answer)
       @guess_checker.split
-      expect(@guess_checker.valid_colors).to eq(false)
+      expect(@guess_checker.valid_colors(4)).to eq(false)
 
       @guess_checker = GuessChecker.new('BYFZ', @answer)
       @guess_checker.split
-      expect(@guess_checker.valid_colors).to eq(false)
+      expect(@guess_checker.valid_colors(4)).to eq(false)
+    end
+
+    it 'with 5 valid colors' do
+      @answer = ['R', 'B', 'G', 'Y', 'O', 'R']
+      @guess_checker = GuessChecker.new('RGBYOR', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(5)).to eq(true)
+
+      @guess_checker = GuessChecker.new('FZBYOG', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(5)).to eq(false)
+
+      @guess_checker = GuessChecker.new('BYFZOG', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(5)).to eq(false)
+    end
+
+    it 'with 6 valid colors' do
+      @answer = ['R', 'B', 'G', 'Y', 'O', 'R', 'G', 'B']
+      @guess_checker = GuessChecker.new('RGBYORGB', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(6)).to eq(true)
+
+      @guess_checker = GuessChecker.new('FZBYOPGB', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(6)).to eq(false)
+
+      @guess_checker = GuessChecker.new('BYFZOPGB', @answer)
+      @guess_checker.split
+      expect(@guess_checker.valid_colors(6)).to eq(false)
     end
   end
 
