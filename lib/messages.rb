@@ -10,12 +10,35 @@ class Messages
     file.close
   end
 
-  def starter_message
-    puts "\nI have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n"
+  def restart_message
+    puts "\nWould you like to (p)lay again or (q)uit?\n"
+  end
+
+  def difficulty_level_message
+    puts ""
+    puts "-" * 20
+    puts "What difficulty would you like to play? (or (q)uit)\n\n"
+    puts "(b)eginner: 4 characters, 4 colors"
+    puts "(i)ntermediate: 6 characters, 5 colors"
+    puts "(h)ard: 8 characters, 6 colors\n"
+    puts "-" * 20
+    puts ""
+  end
+
+  def starter_message_beginner
+    puts "\nI have generated a beginner sequence with 4 elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n"
+  end
+
+  def starter_message_intermediate
+    puts "\nI have generated an intermediate sequence with 6 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, and (o)range. Use (q)uit at any time to end the game.\n"
+  end
+
+  def starter_message_hard
+    puts "\nI have generated a hard sequence with 8 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (o)range and (p)ink. Use (q)uit at any time to end the game.\n"
   end
 
   def prompt_guess_message
-    puts "\nWhat's your guess?\n"
+    puts "\nWhat's your guess? (or (q)uit)\n"
   end
 
   def too_long_message

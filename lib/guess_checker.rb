@@ -6,12 +6,12 @@ attr_reader :guess, :answer
     @answer = answer
   end
 
-  def length_long
-    @guess.length > 4
+  def length_long(char)
+    @guess.length > char
   end
 
-  def length_short
-    @guess.length < 4
+  def length_short(char)
+    @guess.length < char
   end
 
   def split
@@ -23,8 +23,14 @@ attr_reader :guess, :answer
     @guess = @guess.map { |color| color.upcase }
   end
 
-  def valid_colors
-    valid_options = ['R', 'B', 'G', 'Y']
+  def valid_colors(color)
+    if color == 4
+      valid_options = ['R', 'G', 'Y', 'B']
+    elsif color == 5
+      valid_options = ['R', 'G', 'Y', 'B', 'O']
+    elsif color == 6
+      valid_options = ['R', 'G', 'Y', 'B', 'O', 'P']
+    end
     result = true
     @guess.each do |color|
       if !valid_options.include?(color)
