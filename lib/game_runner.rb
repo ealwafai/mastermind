@@ -134,6 +134,7 @@ class GameRunner
     @guess_history.each do |guess|
       @messages.history_message(guess)
     end
+    @messages.history_close_message
   end
 
   def restart
