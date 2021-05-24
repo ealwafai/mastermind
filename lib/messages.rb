@@ -74,7 +74,7 @@ class Messages
   def cheat_message(secret_answer)
     puts ""
     puts "-" * 20
-    puts "You have chosen to take the easy way out. Here is the #{secret_answer}.\n"
+    puts "You have chosen to take the easy way out. The answer is: ===>> #{secret_answer.join("").downcase} <<===\n"
     puts "-" * 20
   end
 
