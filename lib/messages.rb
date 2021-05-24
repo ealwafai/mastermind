@@ -63,6 +63,10 @@ class Messages
     puts "-" * 20
   end
 
+  def history_message(guess)
+    puts "Guess #{guess[:guess_count]}: \'#{guess[:user_guess]}\', with #{guess[:correct_colors]} of the correct colors and #{guess[:correct_positions]} in the correct positions."
+  end
+
   def player_loses_message
     puts "\nGAME OVER!\n"
   end
@@ -78,7 +82,7 @@ class Messages
   def correct_guesses_message(guess_count, guess, color, position)
     puts ""
     puts "-" * 20
-    puts "Guess #{guess_count}: \'#{guess}\' has #{color} of the correct elements with #{position} in the correct positions.\n"
+    puts "Guess #{guess_count}: \'#{guess}\' has #{color} of the correct colors with #{position} in the correct positions.\n"
     puts "-" * 20
   end
 end
