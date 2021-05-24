@@ -64,6 +64,10 @@ class Messages
   end
 
   def history_message(guess)
+    if guess[:guess_count] == 1
+      puts ""
+      puts "-" * 20
+    end
     puts "Guess #{guess[:guess_count]}: \'#{guess[:user_guess]}\', with #{guess[:correct_colors]} of the correct colors and #{guess[:correct_positions]} in the correct positions."
   end
 
