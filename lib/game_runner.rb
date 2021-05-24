@@ -86,7 +86,7 @@ class GameRunner
         @messages.cheat_message(@solution)
         break
       elsif guess == 'H' || guess == 'h'
-        @messages.history_message
+        history
       else
         has_won = analyze(guess, char, color)
       end
