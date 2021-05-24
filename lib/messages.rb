@@ -26,19 +26,34 @@ class Messages
   end
 
   def starter_message_beginner
-    puts "\nI have generated a beginner sequence with 4 elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n"
+    puts ""
+    puts "-" * 20
+    puts "I have generated a beginner sequence with 4 elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n\n"
+    puts "You may also (c)heat to see the answer and end the game or (q)uit anytime.\n\n"
+    puts "(h)istory to see your previous guesses."
+    puts "-" * 20
   end
 
   def starter_message_intermediate
-    puts "\nI have generated an intermediate sequence with 6 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, and (o)range. Use (q)uit at any time to end the game.\n"
+    puts ""
+    puts "-" * 20
+    puts "I have generated an intermediate sequence with 6 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, and (o)range. Use (q)uit at any time to end the game.\n\n"
+    puts "You may also (c)heat to see the answer and end the game or (q)uit anytime.\n\n"
+    puts "(h)istory to see your previous guesses."
+    puts "-" * 20
   end
 
   def starter_message_hard
-    puts "\nI have generated a hard sequence with 8 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (o)range and (p)ink. Use (q)uit at any time to end the game.\n"
+    puts ""
+    puts "-" * 20
+    puts "I have generated a hard sequence with 8 elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (o)range and (p)ink. Use (q)uit at any time to end the game.\n\n"
+    puts "You may also (c)heat to see the answer and end the game or (q)uit anytime.\n\n"
+    puts "(h)istory to see your previous guesses."
+    puts "-" * 20
   end
 
   def prompt_guess_message
-    puts "\nWhat's your guess? (or (q)uit)\n"
+    puts "What's your guess?"
   end
 
   def too_long_message
@@ -59,8 +74,21 @@ class Messages
   def cheat_message(secret_answer)
     puts ""
     puts "-" * 20
-    puts "You have chosen to take the easy way out. Here is the #{secret_answer}.\n"
+    puts "You have chosen to take the easy way out. The answer is: ===>> #{secret_answer.join("").downcase} <<===\n"
     puts "-" * 20
+  end
+
+  def history_message(guess)
+    if guess[:guess_count] == 1
+      puts ""
+      puts "-" * 20
+    end
+    puts "Guess #{guess[:guess_count]}: \'#{guess[:user_guess]}\', with #{guess[:correct_colors]} of the correct colors and #{guess[:correct_positions]} in the correct positions."
+  end
+
+  def history_close_message
+    puts "-" * 20
+    puts ""
   end
 
   def player_loses_message
@@ -78,7 +106,7 @@ class Messages
   def correct_guesses_message(guess_count, guess, color, position)
     puts ""
     puts "-" * 20
-    puts "Guess #{guess_count}: \'#{guess}\' has #{color} of the correct elements with #{position} in the correct positions.\n"
+    puts "Guess #{guess_count}: \'#{guess}\' has #{color} of the correct colors with #{position} in the correct positions.\n"
     puts "-" * 20
   end
 end

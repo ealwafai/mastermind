@@ -70,6 +70,7 @@ class GameRunner
     end
     @timer = Time.now
     @guess_count = 0
+    @guess_history = []
     starter(char, color)
   end
 
@@ -84,6 +85,8 @@ class GameRunner
       elsif guess == 'C' || guess == 'c'
         @messages.cheat_message(@solution)
         break
+      elsif guess == 'H' || guess == 'h'
+        history
       else
         has_won = analyze(guess, char, color)
       end
@@ -123,7 +126,15 @@ class GameRunner
       true
     else
       @messages.correct_guesses_message(@guess_count, guess, colors, positions)
+      @guess_history << {guess_count: @guess_count, user_guess: guess, correct_colors: colors, correct_positions: positions}
     end
+  end
+
+  def history
+    @guess_history.each do |guess|
+      @messages.history_message(guess)
+    end
+    @messages.history_close_message
   end
 
   def restart
